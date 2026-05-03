@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seif Mostafa — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f7f3ea;
+  --bg-rgb:247,243,234;
+  --bg-elevated:#fbf8f0;
+  --border:#e3ddcd;
+  --border-strong:#cfc7b1;
+  --text:#1a1a1c;
+  --text-muted:#5e5a52;
+  --text-subtle:#94908a;
+  --accent:#9c6f1c;
+  --accent-soft:rgba(156,111,28,.12);
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+html[data-theme="dark"]{
+  --bg:#15141a;
+  --bg-rgb:21,20,26;
+  --bg-elevated:#1c1b22;
+  --border:#2a2832;
+  --border-strong:#3d3a47;
+  --text:#ededea;
+  --text-muted:#a09c95;
+  --text-subtle:#6a665e;
+  --accent:#e8b86b;
+  --accent-soft:rgba(232,184,107,.12);
+}
+html,body{transition:background .3s ease,color .3s ease}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.6;
+  font-weight:400;
+}
+::selection{background:var(--accent);color:var(--bg)}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-subtle)}
+
+a{color:inherit;text-decoration:none}
+
+/* LAYOUT */
+.container{max-width:760px;margin:0 auto;padding:0 2rem}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(var(--bg-rgb),.85);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:760px;margin:0 auto;padding:1.1rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;
+}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-logo{
+  font-family:var(--serif);font-weight:500;font-size:1.05rem;
+  letter-spacing:-.01em;
+}
+.nav-links{display:flex;gap:1.8rem;list-style:none;align-items:center}
+.nav-links a{
+  font-size:.86rem;color:var(--text-muted);
+  font-weight:400;transition:color .2s ease;
+}
+.nav-links a:hover{color:var(--text)}
+.theme-toggle{
+  width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid var(--border);border-radius:50%;
+  color:var(--text-muted);cursor:pointer;
+  transition:all .25s ease;font-size:.95rem;line-height:1;
+  font-family:inherit;
+}
+.theme-toggle:hover{
+  color:var(--accent);border-color:var(--accent);
+  transform:rotate(15deg);
+}
+.theme-toggle .moon{display:none}
+.theme-toggle .sun{display:inline}
+html[data-theme="dark"] .theme-toggle .moon{display:inline}
+html[data-theme="dark"] .theme-toggle .sun{display:none}
+
+/* SECTIONS */
+section{padding:5rem 0;border-bottom:1px solid var(--border)}
+section:last-of-type{border-bottom:none}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.7rem;
+}
+.eyebrow::before{
+  content:'';width:18px;height:1px;background:var(--accent);
+}
+
+h1,h2,h3{
+  font-family:var(--serif);font-weight:400;
+  letter-spacing:-.02em;color:var(--text);
+}
+
+/* HERO */
+.hero{
+  padding:7rem 0 5rem;
+  border-bottom:1px solid var(--border);
+}
+.hero-name{
+  font-size:clamp(2.6rem,6vw,4rem);
+  font-weight:400;line-height:1.05;
+  margin-bottom:1.2rem;letter-spacing:-.03em;
+}
+.hero-name em{
+  font-style:italic;color:var(--accent);font-weight:300;
+}
+.hero-title{
+  font-size:1.05rem;color:var(--text-muted);
+  margin-bottom:1.8rem;font-weight:400;
+}
+.hero-title .pip{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:var(--accent);margin-right:.6rem;vertical-align:middle;
+  box-shadow:0 0 12px var(--accent-soft);
+}
+.hero-intro{
+  font-size:1.05rem;color:var(--text-muted);
+  max-width:600px;line-height:1.7;
+}
+.hero-meta{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  margin-top:2.5rem;
+  font-family:var(--mono);font-size:.78rem;
+  color:var(--text-subtle);
+}
+.hero-meta div span{color:var(--text);margin-left:.5rem}
+
+/* ABOUT */
+.about-body{
+  font-size:1.02rem;color:var(--text-muted);line-height:1.8;
+}
+.about-body p+p{margin-top:1.2rem}
+.about-body strong{color:var(--text);font-weight:500}
+
+/* STACK */
+.stack-list{display:grid;gap:1.8rem}
+.stack-row{
+  display:grid;grid-template-columns:140px 1fr;gap:1.5rem;
+  padding-bottom:1.4rem;border-bottom:1px solid var(--border);
+  align-items:start;
+}
+.stack-row:last-child{border-bottom:none}
+.stack-label{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-subtle);
+  padding-top:.3rem;
+}
+.stack-items{
+  display:flex;flex-wrap:wrap;gap:.4rem .9rem;
+  font-size:.95rem;color:var(--text);
+}
+.stack-items span{
+  position:relative;
+}
+.stack-items span:not(:last-child)::after{
+  content:'·';color:var(--text-subtle);margin-left:.9rem;
+}
+
+/* PROJECTS */
+.project-list{display:flex;flex-direction:column}
+.project{
+  display:block;padding:1.8rem 0;
+  border-bottom:1px solid var(--border);
+  transition:padding-left .25s ease;
+}
+.project:last-child{border-bottom:none}
+.project:hover{padding-left:.6rem}
+.project-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:1rem;margin-bottom:.5rem;
+}
+.project-name{
+  font-family:var(--serif);font-size:1.35rem;font-weight:500;
+  letter-spacing:-.01em;
+  transition:color .2s ease;
+}
+.project:hover .project-name{color:var(--accent)}
+.project-meta{
+  font-family:var(--mono);font-size:.72rem;
+  color:var(--text-subtle);letter-spacing:.05em;
+  white-space:nowrap;
+}
+.project-desc{
+  font-size:.96rem;color:var(--text-muted);line-height:1.65;
+  margin-bottom:.8rem;
+}
+.project-arrow{
+  font-family:var(--mono);font-size:.75rem;color:var(--accent);
+  letter-spacing:.1em;opacity:0;transform:translateX(-6px);
+  transition:opacity .25s ease,transform .25s ease;
+}
+.project:hover .project-arrow{opacity:1;transform:translateX(0)}
+
+/* STATS */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border:1px solid var(--border);
+}
+.stat{
+  padding:1.8rem 1.2rem;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat:last-child{border-right:none}
+.stat-num{
+  font-family:var(--serif);font-size:2rem;font-weight:400;
+  color:var(--text);letter-spacing:-.02em;line-height:1;
+  margin-bottom:.5rem;
+}
+.stat-num em{font-style:italic;color:var(--accent);font-weight:300}
+.stat-label{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-subtle);
+}
+
+/* CONTACT */
+.contact-body{
+  font-size:1.05rem;color:var(--text-muted);
+  line-height:1.7;max-width:560px;
+}
+.contact-links{
+  margin-top:2rem;
+  display:flex;flex-direction:column;gap:1rem;
+}
+.contact-link{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 0;border-bottom:1px solid var(--border);
+  transition:padding-left .25s ease,color .25s ease;
+  color:var(--text);
+}
+.contact-link:hover{padding-left:.6rem;color:var(--accent)}
+.contact-link .label{
+  font-family:var(--mono);font-size:.72rem;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-subtle);width:80px;flex-shrink:0;
+}
+.contact-link .val{font-size:.98rem}
+.contact-link .arrow{
+  margin-left:auto;font-family:var(--mono);font-size:.85rem;
+  color:var(--text-subtle);
+  transition:transform .25s ease,color .25s ease;
+}
+.contact-link:hover .arrow{transform:translateX(4px);color:var(--accent)}
+
+/* FOOTER */
+footer{
+  padding:3rem 0 4rem;text-align:center;
+  font-family:var(--mono);font-size:.72rem;
+  color:var(--text-subtle);letter-spacing:.04em;
+}
+footer .dot{color:var(--accent);margin:0 .6rem}
+
+/* REVEAL */
+.reveal{
+  opacity:0;transform:translateY(16px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .container,.nav-inner{padding:0 1.4rem}
+  .hero{padding:5rem 0 3.5rem}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}
+  .stack-row{grid-template-columns:1fr;gap:.6rem}
+  .nav-links{display:none}
+  .project-head{flex-direction:column;align-items:flex-start;gap:.3rem}
+  section{padding:3.5rem 0}
+}
+</style>
+<script>
+(function(){
+  const stored=localStorage.getItem('theme');
+  const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme=stored||(prefersDark?'dark':'light');
+  if(theme==='dark')document.documentElement.setAttribute('data-theme','dark');
+})();
+</script>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Seif Mostafa</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <h1 class="hero-name">Seif <em>Mostafa</em></h1>
+    <p class="hero-title"><span class="pip"></span>Senior Software Engineer · Cairo, Egypt</p>
+    <p class="hero-intro">
+      Software geek and knowledge seeker. I build things across the stack — from Unix shells in C++ to web APIs in Node, Rails apps, and Java games. Currently focused on Software Design &amp; Development.
+    </p>
+    <div class="hero-meta">
+      <div>uid<span>SeifMostafaa</span></div>
+      <div>since<span>2019</span></div>
+      <div>location<span>Cairo, EG</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container reveal">
+    <div class="eyebrow">01 — About</div>
+    <div class="about-body">
+      <p>
+        I'm a software engineer based in Cairo who treats code as a craft — equally at home wiring up a <strong>Rails backend</strong>, building a <strong>Unix shell from scratch in C++</strong>, or shipping a <strong>Node API</strong>.
+      </p>
+      <p>
+        Most of my work lives somewhere between systems and the web: I like understanding what's underneath the abstraction, then using that to ship cleaner, simpler interfaces on top. Outside of the editor, I'm a <strong>part-time gamer</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="container reveal">
+    <div class="eyebrow">02 — Stack</div>
+    <div class="stack-list">
+      <div class="stack-row">
+        <div class="stack-label">Languages</div>
+        <div class="stack-items">
+          <span>JavaScript</span><span>Ruby</span><span>Java</span><span>C++</span><span>PHP</span><span>HTML</span><span>CSS</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Frameworks</div>
+        <div class="stack-items">
+          <span>Ruby on Rails</span><span>Node.js</span><span>Flutter</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Cloud &amp; Data</div>
+        <div class="stack-items">
+          <span>Azure</span><span>Firebase</span><span>MongoDB</span><span>Docker</span>
+        </div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label">Tooling</div>
+        <div class="stack-items">
+          <span>Git</span><span>VS Code</span><span>Android Studio</span><span>Figma</span><span>Linux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container reveal">
+    <div class="eyebrow">03 — Selected Projects</div>
+    <div class="project-list">
+      <a href="https://github.com/SeifMostafaa/Simple-Shell-Project" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">Simple Shell</div>
+          <div class="project-meta">C++ · Systems</div>
+        </div>
+        <p class="project-desc">A Unix-style shell built from scratch in C++ — command parsing, process forking, piping, and built-ins. A deep dive into how the terminal actually works.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa/RiverCrossing-Game" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">River Crossing</div>
+          <div class="project-meta">Java · OOP</div>
+        </div>
+        <p class="project-desc">A Java simulation of the classic River Crossing puzzle — multiple levels, configurable rules, clean object-oriented state modelling.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa/fleet_managment_system" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">Fleet Management System</div>
+          <div class="project-meta">PHP · Backend</div>
+        </div>
+        <p class="project-desc">A PHP-powered fleet management system for tracking vehicles, drivers, trips, and maintenance — full CRUD with relational data modelling.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa/bosta-api-assessment" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">Bosta API</div>
+          <div class="project-meta">JavaScript · Node.js</div>
+        </div>
+        <p class="project-desc">A backend API assessment in Node.js — authentication, validation, pagination, and clean RESTful design from spec to deploy.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa/jogging_tracker" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">Jogging Tracker</div>
+          <div class="project-meta">Ruby on Rails</div>
+        </div>
+        <p class="project-desc">A Rails app for logging runs, weekly mileage, and visualising progress over time — built around clean MVC and idiomatic Rails patterns.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa/FruitNinja" target="_blank" class="project">
+        <div class="project-head">
+          <div class="project-name">Fruit Ninja</div>
+          <div class="project-meta">Java · Game</div>
+        </div>
+        <p class="project-desc">A Java take on the classic Fruit Ninja — sprite handling, collision, scoring, and game-loop fundamentals as a hands-on exploration of 2D game engineering.</p>
+        <span class="project-arrow">View on GitHub →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container reveal">
+    <div class="eyebrow">04 — At a glance</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num"><em>17</em></div>
+        <div class="stat-label">Repositories</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>23</em></div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>27</em></div>
+        <div class="stat-label">Following</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>7</em></div>
+        <div class="stat-label">Years on GitHub</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container reveal">
+    <div class="eyebrow">05 — Contact</div>
+    <p class="contact-body">
+      Best reached by email — I'm always happy to talk shop, swap notes on systems work, or hear about something you're building.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:saif.mfayez@gmail.com" class="contact-link">
+        <span class="label">Email</span>
+        <span class="val">saif.mfayez@gmail.com</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="https://github.com/SeifMostafaa" target="_blank" class="contact-link">
+        <span class="label">GitHub</span>
+        <span class="val">github.com/SeifMostafaa</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    Seif Mostafa <span class="dot">·</span> Cairo, EG <span class="dot">·</span> 2026
+  </div>
+</footer>
+
+<script>
+const themeToggle=document.getElementById('themeToggle');
+themeToggle.addEventListener('click',()=>{
+  const isDark=document.documentElement.getAttribute('data-theme')==='dark';
+  if(isDark){
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('theme','light');
+  }else{
+    document.documentElement.setAttribute('data-theme','dark');
+    localStorage.setItem('theme','dark');
+  }
+});
+
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:.12});
+reveals.forEach(r=>obs.observe(r));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=a.getAttribute('href');
+    if(t.length>1){
+      e.preventDefault();
+      document.querySelector(t).scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
