@@ -119,6 +119,59 @@ h1,h2,h3{
   padding:7rem 0 5rem;
   border-bottom:1px solid var(--border);
 }
+.hero-avatar{
+  width:84px;height:84px;border-radius:50%;
+  object-fit:cover;display:block;margin-bottom:2rem;
+  filter:grayscale(.25) contrast(1.02);
+  border:1px solid var(--border-strong);
+  box-shadow:0 6px 24px rgba(0,0,0,.06);
+  transition:filter .35s ease,transform .35s ease,box-shadow .35s ease;
+}
+.hero-avatar:hover{
+  filter:grayscale(0);
+  transform:scale(1.04) rotate(-1deg);
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+html[data-theme="dark"] .hero-avatar{
+  filter:grayscale(.35) brightness(.92);
+  box-shadow:0 6px 24px rgba(0,0,0,.4);
+}
+html[data-theme="dark"] .hero-avatar:hover{
+  filter:grayscale(0) brightness(1);
+}
+.hero-now{
+  display:flex;align-items:baseline;gap:1.1rem;
+  margin-top:2.2rem;max-width:600px;
+  padding:1rem 1.2rem;
+  background:var(--accent-soft);
+  border-left:2px solid var(--accent);
+  font-size:.96rem;line-height:1.55;
+}
+.hero-now-label{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);
+  flex-shrink:0;
+}
+.hero-now-text{color:var(--text-muted)}
+.hero-now-text strong{color:var(--text);font-weight:500}
+
+/* STAGGER */
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(14px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero .container > *{
+  opacity:0;animation:heroIn .85s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero .container > *:nth-child(1){animation-delay:.05s}
+.hero .container > *:nth-child(2){animation-delay:.18s}
+.hero .container > *:nth-child(3){animation-delay:.30s}
+.hero .container > *:nth-child(4){animation-delay:.42s}
+.hero .container > *:nth-child(5){animation-delay:.54s}
+.hero .container > *:nth-child(6){animation-delay:.66s}
+@media (prefers-reduced-motion:reduce){
+  .hero .container > *,.reveal{animation:none;opacity:1;transform:none;transition:none}
+}
 .hero-name{
   font-size:clamp(2.6rem,6vw,4rem);
   font-weight:400;line-height:1.05;
@@ -179,61 +232,72 @@ h1,h2,h3{
   content:'·';color:var(--text-subtle);margin-left:.9rem;
 }
 
-/* PROJECTS */
-.project-list{display:flex;flex-direction:column}
-.project{
-  display:block;padding:1.8rem 0;
-  border-bottom:1px solid var(--border);
-  transition:padding-left .25s ease;
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:2.5rem}
+.exp{
+  padding-bottom:2.2rem;border-bottom:1px solid var(--border);
 }
-.project:last-child{border-bottom:none}
-.project:hover{padding-left:.6rem}
-.project-head{
-  display:flex;justify-content:space-between;align-items:baseline;
-  gap:1rem;margin-bottom:.5rem;
+.exp:last-child{border-bottom:none;padding-bottom:0}
+.exp-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:1.5rem;margin-bottom:1.1rem;
 }
-.project-name{
-  font-family:var(--serif);font-size:1.35rem;font-weight:500;
-  letter-spacing:-.01em;
-  transition:color .2s ease;
+.exp-role{
+  font-family:var(--serif);font-size:1.3rem;font-weight:500;
+  letter-spacing:-.01em;line-height:1.25;
 }
-.project:hover .project-name{color:var(--accent)}
-.project-meta{
+.exp-company{
+  font-family:var(--sans);font-size:.95rem;
+  color:var(--text-muted);margin-top:.3rem;
+}
+.exp-company .where{color:var(--text-subtle)}
+.exp-period{
   font-family:var(--mono);font-size:.72rem;
-  color:var(--text-subtle);letter-spacing:.05em;
-  white-space:nowrap;
+  color:var(--text-subtle);letter-spacing:.06em;
+  white-space:nowrap;flex-shrink:0;padding-top:.55rem;
 }
-.project-desc{
-  font-size:.96rem;color:var(--text-muted);line-height:1.65;
-  margin-bottom:.8rem;
+.exp-bullets{
+  list-style:none;padding-left:0;
+  display:flex;flex-direction:column;gap:.7rem;
 }
-.project-arrow{
-  font-family:var(--mono);font-size:.75rem;color:var(--accent);
-  letter-spacing:.1em;opacity:0;transform:translateX(-6px);
-  transition:opacity .25s ease,transform .25s ease;
+.exp-bullets li{
+  font-size:.95rem;color:var(--text-muted);line-height:1.65;
+  padding-left:1.2rem;position:relative;
 }
-.project:hover .project-arrow{opacity:1;transform:translateX(0)}
+.exp-bullets li::before{
+  content:'';position:absolute;left:0;top:.7em;
+  width:6px;height:1px;background:var(--text-subtle);
+}
+.exp-bullets li strong{color:var(--text);font-weight:500}
+.exp-bullets li .ai{
+  color:var(--accent);font-weight:500;
+  background:linear-gradient(transparent 80%,var(--accent-soft) 80%);
+}
 
-/* STATS */
-.stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  border:1px solid var(--border);
+/* BACKGROUND */
+.bg-grid{display:flex;flex-direction:column;gap:1.8rem}
+.bg-block{
+  padding-bottom:1.6rem;border-bottom:1px solid var(--border);
 }
-.stat{
-  padding:1.8rem 1.2rem;text-align:center;
-  border-right:1px solid var(--border);
-}
-.stat:last-child{border-right:none}
-.stat-num{
-  font-family:var(--serif);font-size:2rem;font-weight:400;
-  color:var(--text);letter-spacing:-.02em;line-height:1;
-  margin-bottom:.5rem;
-}
-.stat-num em{font-style:italic;color:var(--accent);font-weight:300}
-.stat-label{
-  font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;
+.bg-block:last-child{border-bottom:none;padding-bottom:0}
+.bg-label{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--text-subtle);
+  margin-bottom:.6rem;
 }
+.bg-title{
+  font-family:var(--serif);font-size:1.15rem;font-weight:500;
+  margin-bottom:.3rem;color:var(--text);letter-spacing:-.005em;
+  line-height:1.3;
+}
+.bg-meta{
+  font-family:var(--mono);font-size:.74rem;color:var(--text-subtle);
+  margin-bottom:.6rem;letter-spacing:.04em;
+}
+.bg-note{
+  font-size:.94rem;color:var(--text-muted);line-height:1.65;
+}
+.bg-note strong{color:var(--text);font-weight:500}
 
 /* CONTACT */
 .contact-body{
@@ -283,12 +347,10 @@ footer .dot{color:var(--accent);margin:0 .6rem}
 @media(max-width:640px){
   .container,.nav-inner{padding:0 1.4rem}
   .hero{padding:5rem 0 3.5rem}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(2){border-right:none}
-  .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--border)}
   .stack-row{grid-template-columns:1fr;gap:.6rem}
   .nav-links{display:none}
-  .project-head{flex-direction:column;align-items:flex-start;gap:.3rem}
+  .exp-head{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .exp-period{padding-top:0}
   section{padding:3.5rem 0}
 }
 </style>
@@ -309,8 +371,8 @@ footer .dot{color:var(--accent);margin:0 .6rem}
     <div class="nav-right">
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#stack">Stack</a></li>
-        <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -323,15 +385,20 @@ footer .dot{color:var(--accent);margin:0 .6rem}
 <!-- HERO -->
 <header class="hero">
   <div class="container">
+    <img src="https://avatars.githubusercontent.com/u/47889632?v=4" alt="Seif Mostafa" class="hero-avatar" loading="eager">
     <h1 class="hero-name">Seif <em>Mostafa</em></h1>
-    <p class="hero-title"><span class="pip"></span>Senior Software Engineer · Cairo, Egypt</p>
+    <p class="hero-title"><span class="pip"></span>Senior Software Engineer · Alexandria, Egypt</p>
     <p class="hero-intro">
-      Software geek and knowledge seeker. I build things across the stack — from Unix shells in C++ to web APIs in Node, Rails apps, and Java games. Currently focused on Software Design &amp; Development.
+      Senior Ruby on Rails engineer building production systems augmented with frontier LLMs. I work at the seam where prompt engineering meets shipping software — turning Claude-assisted workflows into measurable delivery gains.
     </p>
+    <div class="hero-now">
+      <span class="hero-now-label">Now</span>
+      <span class="hero-now-text">Senior engineering at <strong>ILLA</strong> — leveraging <strong>Claude Sonnet &amp; Opus</strong> for feature delivery, refactoring, and LLM-driven FMCG schema integrations across the MENA region.</span>
+    </div>
     <div class="hero-meta">
-      <div>uid<span>SeifMostafaa</span></div>
-      <div>since<span>2019</span></div>
-      <div>location<span>Cairo, EG</span></div>
+      <div>role<span>Senior Engineer</span></div>
+      <div>focus<span>LLM-Augmented Delivery</span></div>
+      <div>location<span>Alexandria, EG</span></div>
     </div>
   </div>
 </header>
@@ -342,10 +409,13 @@ footer .dot{color:var(--accent);margin:0 .6rem}
     <div class="eyebrow">01 — About</div>
     <div class="about-body">
       <p>
-        I'm a software engineer based in Cairo who treats code as a craft — equally at home wiring up a <strong>Rails backend</strong>, building a <strong>Unix shell from scratch in C++</strong>, or shipping a <strong>Node API</strong>.
+        I'm a senior software engineer based in Alexandria, working primarily in <strong>Ruby on Rails</strong> — but my real focus is the rapidly shifting line between human and <strong>LLM-driven engineering</strong>.
       </p>
       <p>
-        Most of my work lives somewhere between systems and the web: I like understanding what's underneath the abstraction, then using that to ship cleaner, simpler interfaces on top. Outside of the editor, I'm a <strong>part-time gamer</strong>.
+        At <strong>ILLA</strong>, I lead Claude-augmented feature delivery and use LLMs to automate the messy parts of FMCG supplier integrations — schema mapping, normalization, the kind of work that used to eat sprints. I treat the model as a collaborator, not a tool: prompt design, evals, and well-scoped agentic loops are part of the day-to-day.
+      </p>
+      <p>
+        My undergrad years were spent on classical ML — CNNs for sign-language translation, speech-emotion recognition, PCA/LDA face recognition. Useful priors when reasoning about modern LLMs and where they belong in a production system.
       </p>
     </div>
   </div>
@@ -354,113 +424,129 @@ footer .dot{color:var(--accent);margin:0 .6rem}
 <!-- STACK -->
 <section id="stack">
   <div class="container reveal">
-    <div class="eyebrow">02 — Stack</div>
+    <div class="eyebrow">03 — Stack</div>
     <div class="stack-list">
+      <div class="stack-row">
+        <div class="stack-label">AI &amp; LLM</div>
+        <div class="stack-items">
+          <span>Claude (Sonnet &amp; Opus)</span><span>Prompt Engineering</span><span>LLM-driven schema mapping</span><span>Agentic workflows</span><span>Keras / CNN</span><span>PCA / LDA</span>
+        </div>
+      </div>
       <div class="stack-row">
         <div class="stack-label">Languages</div>
         <div class="stack-items">
-          <span>JavaScript</span><span>Ruby</span><span>Java</span><span>C++</span><span>PHP</span><span>HTML</span><span>CSS</span>
+          <span>Ruby</span><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>JavaScript</span><span>HTML</span><span>CSS</span>
         </div>
       </div>
       <div class="stack-row">
         <div class="stack-label">Frameworks</div>
         <div class="stack-items">
-          <span>Ruby on Rails</span><span>Node.js</span><span>Flutter</span>
+          <span>Ruby on Rails</span><span>Node.js</span>
         </div>
       </div>
       <div class="stack-row">
-        <div class="stack-label">Cloud &amp; Data</div>
+        <div class="stack-label">Data</div>
         <div class="stack-items">
-          <span>Azure</span><span>Firebase</span><span>MongoDB</span><span>Docker</span>
+          <span>PostgreSQL</span><span>NoSQL</span><span>MongoDB</span><span>SQL Optimization</span>
         </div>
       </div>
       <div class="stack-row">
         <div class="stack-label">Tooling</div>
         <div class="stack-items">
-          <span>Git</span><span>VS Code</span><span>Android Studio</span><span>Figma</span><span>Linux</span>
+          <span>Git</span><span>Linux</span><span>Docker</span><span>VS Code</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects">
+<!-- EXPERIENCE -->
+<section id="experience">
   <div class="container reveal">
-    <div class="eyebrow">03 — Selected Projects</div>
-    <div class="project-list">
-      <a href="https://github.com/SeifMostafaa/Simple-Shell-Project" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">Simple Shell</div>
-          <div class="project-meta">C++ · Systems</div>
-        </div>
-        <p class="project-desc">A Unix-style shell built from scratch in C++ — command parsing, process forking, piping, and built-ins. A deep dive into how the terminal actually works.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
-      <a href="https://github.com/SeifMostafaa/RiverCrossing-Game" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">River Crossing</div>
-          <div class="project-meta">Java · OOP</div>
-        </div>
-        <p class="project-desc">A Java simulation of the classic River Crossing puzzle — multiple levels, configurable rules, clean object-oriented state modelling.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
-      <a href="https://github.com/SeifMostafaa/fleet_managment_system" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">Fleet Management System</div>
-          <div class="project-meta">PHP · Backend</div>
-        </div>
-        <p class="project-desc">A PHP-powered fleet management system for tracking vehicles, drivers, trips, and maintenance — full CRUD with relational data modelling.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
-      <a href="https://github.com/SeifMostafaa/bosta-api-assessment" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">Bosta API</div>
-          <div class="project-meta">JavaScript · Node.js</div>
-        </div>
-        <p class="project-desc">A backend API assessment in Node.js — authentication, validation, pagination, and clean RESTful design from spec to deploy.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
-      <a href="https://github.com/SeifMostafaa/jogging_tracker" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">Jogging Tracker</div>
-          <div class="project-meta">Ruby on Rails</div>
-        </div>
-        <p class="project-desc">A Rails app for logging runs, weekly mileage, and visualising progress over time — built around clean MVC and idiomatic Rails patterns.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
-      <a href="https://github.com/SeifMostafaa/FruitNinja" target="_blank" class="project">
-        <div class="project-head">
-          <div class="project-name">Fruit Ninja</div>
-          <div class="project-meta">Java · Game</div>
-        </div>
-        <p class="project-desc">A Java take on the classic Fruit Ninja — sprite handling, collision, scoring, and game-loop fundamentals as a hands-on exploration of 2D game engineering.</p>
-        <span class="project-arrow">View on GitHub →</span>
-      </a>
+    <div class="eyebrow">02 — Experience</div>
+    <div class="exp-list">
+      <article class="exp">
+        <header class="exp-head">
+          <div>
+            <h3 class="exp-role">Senior Software Engineer</h3>
+            <div class="exp-company">ILLA <span class="where">· Egypt</span></div>
+          </div>
+          <div class="exp-period">Aug 2023 — Present</div>
+        </header>
+        <ul class="exp-bullets">
+          <li><span class="ai">Leveraged Claude Sonnet &amp; Opus</span> for feature delivery and refactoring — measured a <strong>15–40% gain</strong> in development efficiency.</li>
+          <li>Spearheaded MENA FMCG supplier integrations with warehouse systems, <span class="ai">using LLMs to automate disparate data schema mapping</span>.</li>
+          <li>Scaled <strong>PostgreSQL</strong> performance and SQL query efficiency to support high-throughput architectural decisions.</li>
+          <li>Led intern training in back-end development, <span class="ai">prompt engineering</span>, and NoSQL data management.</li>
+        </ul>
+      </article>
+
+      <article class="exp">
+        <header class="exp-head">
+          <div>
+            <h3 class="exp-role">Software Engineer · Ruby on Rails</h3>
+            <div class="exp-company">HDBC <span class="where">· Alexandria, Egypt</span></div>
+          </div>
+          <div class="exp-period">Mar 2022 — Jul 2023</div>
+        </header>
+        <ul class="exp-bullets">
+          <li>Led large-scale Ruby on Rails projects for <strong>Gulf-area clients and government entities</strong>.</li>
+          <li>Provided 24/7 support and translated complex client requirements into scalable technical solutions.</li>
+          <li>Optimized PostgreSQL and NoSQL database layers to ensure stability across international production environments.</li>
+        </ul>
+      </article>
+
+      <article class="exp">
+        <header class="exp-head">
+          <div>
+            <h3 class="exp-role">Software Intern · Ruby on Rails</h3>
+            <div class="exp-company">Rubikal <span class="where">· Remote, Egypt</span></div>
+          </div>
+          <div class="exp-period">May 2022 — Jul 2022</div>
+        </header>
+        <ul class="exp-bullets">
+          <li>Delivered complete API implementations in RoR, contributing to real-world client projects within structured sprints.</li>
+          <li>Worked inside agile workflows; integrated business requirements into technical solutions.</li>
+        </ul>
+      </article>
+
+      <article class="exp">
+        <header class="exp-head">
+          <div>
+            <h3 class="exp-role">Software Intern · Ruby on Rails</h3>
+            <div class="exp-company">Inova LLC <span class="where">· Remote, Egypt</span></div>
+          </div>
+          <div class="exp-period">Sep 2020 — Jan 2021</div>
+        </header>
+        <ul class="exp-bullets">
+          <li>Contributed to ongoing company projects, refining team-based software development practices.</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<section id="stats">
+<!-- BACKGROUND -->
+<section id="background">
   <div class="container reveal">
-    <div class="eyebrow">04 — At a glance</div>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-num"><em>17</em></div>
-        <div class="stat-label">Repositories</div>
+    <div class="eyebrow">04 — Background</div>
+    <div class="bg-grid">
+      <div class="bg-block">
+        <div class="bg-label">Education</div>
+        <div class="bg-title">B.S. Computer &amp; Communication Engineering</div>
+        <div class="bg-meta">Faculty of Engineering, Alexandria University · 2017 — 2022</div>
+        <div class="bg-note">Cumulative grade: <strong>Excellent</strong>. Coursework spanned ML, AI, Deep Learning, Algorithms, Databases, OOP, System Programming, and Linux.</div>
       </div>
-      <div class="stat">
-        <div class="stat-num"><em>23</em></div>
-        <div class="stat-label">Followers</div>
+      <div class="bg-block">
+        <div class="bg-label">Leadership</div>
+        <div class="bg-title">Chairman — IEEE AlexSB</div>
+        <div class="bg-meta">Alexandria, Egypt · Oct 2019 — Nov 2022</div>
+        <div class="bg-note">Oversaw branch reform and drove member engagement across the <strong>MENA region</strong>.</div>
       </div>
-      <div class="stat">
-        <div class="stat-num"><em>27</em></div>
-        <div class="stat-label">Following</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num"><em>7</em></div>
-        <div class="stat-label">Years on GitHub</div>
+      <div class="bg-block">
+        <div class="bg-label">Languages</div>
+        <div class="bg-title">Arabic · English · German · French</div>
+        <div class="bg-meta">Fluent · Fluent · Good · Basic</div>
       </div>
     </div>
   </div>
